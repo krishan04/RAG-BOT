@@ -1,0 +1,18 @@
+This project is a monolithic Retrieval-Augmented Generation (RAG) chatbot.
+
+The backend is built with Django for ORM, admin and authentication, and
+FastAPI for the REST API, both running inside a single uvicorn ASGI process.
+The frontend is a React application scaffolded with Vite and TypeScript.
+
+The RAG engine is organized as reusable components. Each component lives in
+its own folder and can have multiple interchangeable implementations: document
+loaders, text splitters, embeddings providers, vectorstores, retrievers,
+conversation memory, prompts and chains. A registry selects a variant by name.
+
+The supported embeddings providers are OpenAI, Google Generative AI and
+HuggingFace. The supported retrievers are a base vectorstore retriever, a
+contextual compression retriever and a Cohere reranker.
+
+A benchmarking harness compares component variants against a fixed corpus by
+measuring ingestion latency and query latency for every combination in a
+component matrix. Benchmark results are persisted through the Django ORM.
